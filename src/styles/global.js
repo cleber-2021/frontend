@@ -1,8 +1,8 @@
 import { createGlobalStyle } from "styled-components";
  
-const Global = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
 
-    *{
+    * {
         margin :0
         padding: 0;
         font-family: 'poppins', 'sans-serif';
@@ -12,10 +12,10 @@ const Global = createGlobalStyle`
         width: 100vw;
         height: 100vh;
         display: flex;
-        justfy-content: center;
+        justify-content: center;
         background-color: #f2f2f2;
 
     }
 `;
 
-export default Global;
+export default GlobalStyle;

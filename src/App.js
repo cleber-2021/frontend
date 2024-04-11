@@ -1,8 +1,9 @@
 import GlobalStyle from "./styles/global";
 import styled from "styled-components";
 import { toast, ToastContainer } from "react-toastify";
-import form from "./components/From.js";
 import "react-toastify/dist/ReactToastify.css";
+import Form from "./components/Form";
+import Grid from "./components/Grid";
 
 
 const Container = styled.div`
@@ -15,7 +16,11 @@ const Container = styled.div`
   gap: 10px;
 `;
 
-const Title = styled.h2``;
+const Title = styled.h2`
+text-align: center;
+
+`;
+
 
 function App() {
   return (
@@ -23,15 +28,18 @@ function App() {
    <>
       <Container>
         <Title>USUÁRIOS</Title>
-        <Form>
-
-        </Form>
-
+      
+        <Form />
+        <Grid />
+      
       </Container>
-      <ToastContainer autoClose={3000} position={POSITION.BOTTOM_LEFT}/>
+
+      
+
       <GlobalStyle/>
+      
    </>
   );
 }
-
+     // <ToastContainer autoClose={3000} position={toast.POSITION.BOTTOM_LEFT}/>
 export default App;
