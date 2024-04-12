@@ -19,20 +19,44 @@ const Table = styled.table`
 
 export const Thead = styled.thead``;
 export const Tr = styled.tr``;
-
+export const Tbody = styled.tbody``;
 export const Th = styled.th`
     text-align: start;
     border-bottom: inset;
     padding-bottom: 5px;
 
-    @media (max-whidth: 500px){
+    @media (max-width: 500px){
+        ${(props) => props.onlyWeb && "display: none"}
+    }
+`;
+
+export const Td = styled.td`
+    padding-top: 15px;
+    text-align: ${(props) => (props.alignCenter ? "center" : "start")};
+    width: ${(props) => (props.width ? props.width : "auto")};
+
+    @media (max-width: 500px ){
         ${(props) => props.onlyWeb && "display: none"}
     }
 `;
 
 
+const Grid = ({users}) => {
 
-const Grid = () => {
+    const handleDelete = async (idusuario) =>{
+        await axios
+        .delete("http://localhost:8800/" + idusuario)
+        .then(({data}) => {
+            const newArray = users.filter((user) => user.idusuario !== idusuario);
+
+            setUsers(newArray);
+            toast.success(data);
+        })
+        .catch(({data}) => toast.error(data));
+
+        setOnEdit(null);
+
+    };
 
     return(
         <Table>
@@ -45,6 +69,23 @@ const Grid = () => {
                     <Th></Th>
                 </Tr>
             </Thead>
+            <Tbody>
+                {users.map((item, i) =>(
+                    <Tr key={i}>
+                       <Td widows="30%">{item.nome}</Td> 
+                       <Td widows="30%">{item.email}</Td>
+                       <Td widows="30%" onlyWeb>
+                        {item.data_nascimento}
+                        </Td>
+                        <Td alignCenter width = "5%">
+                            <FaEdit />
+                        </Td>
+                        <Td alignCenter width = "5%">
+                            <FaTrash onClick={() => handleDelete(item.idusuario)}/>
+                        </Td>
+                    </Tr>
+                ))}
+            </Tbody>
         </Table>
 
     );
